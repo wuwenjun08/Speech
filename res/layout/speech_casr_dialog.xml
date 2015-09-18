@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dip"
+    android:layout_height="200dip"
+    android:background="@drawable/icon_dialog_audio_record_bg">
+    <LinearLayout 
+        android:id="@+id/speech_listening"
+	    android:layout_width="200dip"
+	    android:layout_height="200dip"
+	    android:layout_centerInParent="true"
+	    android:orientation="horizontal"
+        >
+        <ImageView 
+		    android:layout_width="100dip"
+		    android:layout_height="match_parent"
+		    android:src="@drawable/ui_setting_tab_voice_on"
+            />
+        <ImageView 
+            android:id="@+id/speech_volume"
+		    android:layout_width="100dip"
+		    android:layout_height="match_parent"
+		    android:src="@drawable/icon_volume_1"
+            />
+    </LinearLayout>
+    
+    <ProgressBar 
+        android:id="@+id/result_progress"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerInParent="true"
+	    android:visibility="gone"
+        />
+</RelativeLayout>

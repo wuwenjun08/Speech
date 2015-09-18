@@ -1,0 +1,106 @@
+$DIGIT = (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0);
+
+$NUM = ( $DIGIT/min=1,max=11,k="number"/);
+
+$PERSON = #CONTACT#;
+$PERSONX = ($PERSON)/k="person"/;
+$BT_ACTION_PREFIX_01 = ([请]给 | 跟);
+$BT_ACTION_SUFFIX_01 = (致电 | 通话 | 拨号 | 通电 | 电话 | [拨]打电话)/action="call"/;
+$BT_ACTION_PREFIX_02 = (打给 | 打电话给 | 电话给 | 呼叫 | 联系 | 致电 | 拨通 | 拨打)/action="call"/;
+$BT_ACTION_PREFIX_03 = ( 拨打 | 拨通)/action="call"/;
+$BT_ACTION_SUFFIX_03 = (的电话);
+$BT_CMD = (($BT_ACTION_PREFIX_01 ($PERSONX | $NUM) $BT_ACTION_SUFFIX_01) 
+				| ($BT_ACTION_PREFIX_02 ($PERSONX | $NUM)) 
+				| ($BT_ACTION_PREFIX_03 ($PERSONX | $NUM) $BT_ACTION_SUFFIX_03))/domain="phone"/;
+
+
+$TCHIP = (关闭 | 返回 | 打开 | 回到 | 灭 | 关 | 熄);
+$TCHIP_NAME = (屏幕 | 桌面 | 设置 | FM | 地图 | 导航 | 音乐 | 屏);
+$TCHIP_DO_CMD = (($TCHIP $TCHIP_NAME))/action="do"/;
+$TCHIP_CMD = (($TCHIP_DO_CMD))/domain="t-chip"/;
+
+$MEDIA_DATASOURCE_ALL = #MUSIC#;
+$MEDIA_DATASOURCE_ALLX = ($MEDIA_DATASOURCE_ALL)/k="song"/;
+$MEDIA_PLAY_CMD = ((((来 | 放 | 唱 | 听)(首 | 一首 | 一曲)) | (播放 | 演唱))[歌曲 | 音乐]($MEDIA_DATASOURCE_ALLX))/action="play"/;
+$MEDIA_SIMPLE_PLAY_RANDOM_CMD = [随便 | 随意 | 随机 | 任意](来 | 唱 | 放 | 播放 | 播 | 演唱 | 听)[一](首 | 曲)/action="random"/(歌曲 | 歌 | 音乐);
+$MEDIA_SIMPLE_PLAY_NEXT_CMD = [播放 | 唱 | 放 | 播 | 换| 听](下一 | 下面一 | 后一 | 后面一)/action="next"/(首 | 曲)(歌曲 | 歌 | 音乐);
+$MEDIA_SIMPLE_PLAY_PRE_CMD = [播放 | 唱 | 放 | 播 | 换| 听](上一 | 上一 | 上面一 | 前一 | 前面一)/action="prev"/(首 | 曲)(歌曲 | 歌 | 音乐);
+$MEDIA_SIMPLE_PLAY_RESUME_CMD = [继续](播放)/action="resume"/[歌曲 | 音乐];
+$MEDIA_SIMPLE_PLAY_PAUSE_CMD = ((暂停 | 停止)[(播放)[歌曲 | 音乐]])/action="pause"/;
+$MEDIA_CMD = (($MEDIA_PLAY_CMD) | ($MEDIA_SIMPLE_PLAY_RANDOM_CMD) | ($MEDIA_SIMPLE_PLAY_NEXT_CMD) | ($MEDIA_SIMPLE_PLAY_PRE_CMD) | ($MEDIA_SIMPLE_PLAY_RESUME_CMD) | ($MEDIA_SIMPLE_PLAY_PAUSE_CMD))/domain="music"/;
+
+
+$MEDIA_DATASOURCE_RADIO_STATION = ([深圳 | 北京 | 上海 | 广州] (音乐 | 交通 | 人民) (广播 | 电台))/k="station"/;
+$MEDIA_RADIO_ACTION = (收听);
+$MEDIA_RADIO_NUM = ((1 [百] [0] [$DIGIT] [点] [$DIGIT]) | ((8 | 9 ) [十] [$DIGIT] [点] [$DIGIT])/k="fm"/) ;
+$MEDIA_RADIO_FM_CMD = ($MEDIA_RADIO_ACTION  $MEDIA_RADIO_NUM)/action="radio"/;
+$MEDIA_RADIO_STATION_CMD = ([$MEDIA_RADIO_ACTION] ($MEDIA_DATASOURCE_RADIO_STATION))/action="radio"/;
+$MEDIA_RADIO_SEARCH_FORWORD_CMD = (向下搜索)/action="forword"/;
+$MEDIA_RADIO_SEARCH_BACK_CMD = (向上搜索)/action="back"/;
+$MEDIA_RADIO_SWITCH_NEXT_CMD = (([收听 | 切换 | 播放](下一个 | 下个 | 后一个 | 后一 | 后面一个 | 后面一) ([电]台 | 频道 | 频点 | 频率))|(换台))/action="next"/;
+$MEDIA_RADIO_SWITCH_PREV_CMD = ([收听 | 切换 | 播放](上一个 | 上个 | 前一个 | 前一)([电]台 | 频道 | 频点 | 频率))/action="prev"/;
+$MEDIA_RADIO_CMD = ($MEDIA_RADIO_FM_CMD | ($MEDIA_RADIO_STATION_CMD) | ($MEDIA_RADIO_SWITCH_NEXT_CMD) | ($MEDIA_RADIO_SWITCH_PREV_CMD) | ($MEDIA_RADIO_SEARCH_FORWORD_CMD)| ($MEDIA_RADIO_SEARCH_BACK_CMD))/domain="radio"/;
+
+
+$VOLUME_UP = (增大 | 调大 | 调高 | 升高 | 增加 | 大点 );
+$VOLUME_MAX = 最大;
+$VOLUME_DOWN = (减小 | 调小 | 调低 | 降低 | 小点 | 关闭 );
+$VOLUME_MIN = 最小;
+$VOLUME_NAME = (音量 | 声音 | 音响);
+$VOLUME_MUTE_NAME = (静音);
+$VOLUME_MUTE_ON = (打开);
+$VOLUME_MUTE_OFF = (关闭 | 解除 | 取消);
+$VOLUME_UP_CMD = (($VOLUME_UP $VOLUME_NAME) | ($VOLUME_NAME $VOLUME_UP))/action="up"/;
+$VOLUME_DOWN_CMD = (($VOLUME_DOWN $VOLUME_NAME) | ($VOLUME_NAME $VOLUME_DOWN))/action="down"/;
+$VOLUME_MAX_CMD = (($VOLUME_MAX $VOLUME_NAME) | ($VOLUME_NAME $VOLUME_MAX))/action="max"/;
+$VOLUME_MIN_CMD = (($VOLUME_MIN $VOLUME_NAME) | ($VOLUME_NAME $VOLUME_MIN))/action="min"/;
+$VOLUME_MUTE_ON_CMD = (($VOLUME_MUTE_NAME) | ($VOLUME_MUTE_ON $VOLUME_MUTE_NAME) 
+					| ($VOLUME_MUTE_NAME $VOLUME_MUTE_ON))/action="mute_on"/ ;
+$VOLUME_MUTE_OFF_CMD = (($VOLUME_MUTE_OFF $VOLUME_MUTE_NAME) 
+					| ($VOLUME_MUTE_NAME $VOLUME_MUTE_OFF))/action="mute_off"/ ;
+$VOLUME_CMD = (($VOLUME_UP_CMD) | ($VOLUME_DOWN_CMD) | ($VOLUME_MAX_CMD) | ($VOLUME_MIN_CMD)| ($VOLUME_MUTE_ON_CMD) | ($VOLUME_MUTE_OFF_CMD))/domain="volume"/;
+
+
+$BRIGHTNESS_UP1 = (增大 | 调大 | 调高 | 升高 | 增加 | 调亮| 大 | 亮)[点];
+$BRIGHTNESS_MAX = 最大;
+$BRIGHTNESS_DOWN1 = (减小 | 调小 | 调低 | 降低 | 调暗 | 小 | 暗)[点];
+$BRIGHTNESS_MIN = 最小;
+$BRIGHTNESS_NAME1 = (亮度);
+$BRIGHTNESS_UP2 = ( 调亮 | 大 | 亮)[点];
+$BRIGHTNESS_DOWN2 = (调低 | 降低 | 调暗 | 小 | 暗)[点];
+$BRIGHTNESS_NAME2 = (屏幕[亮度]);
+$BRIGHTNESS_UP_CMD = (($BRIGHTNESS_UP1 $BRIGHTNESS_NAME1) | ($BRIGHTNESS_NAME1 $BRIGHTNESS_UP1)| ($BRIGHTNESS_UP2  $BRIGHTNESS_NAME2) | ($BRIGHTNESS_NAME2 $BRIGHTNESS_UP2))/action="up"/;
+$BRIGHTNESS_DONW_CMD = (($BRIGHTNESS_DOWN1 $BRIGHTNESS_NAME1) | ($BRIGHTNESS_NAME1 $BRIGHTNESS_DOWN1) | ($BRIGHTNESS_DOWN2 $BRIGHTNESS_NAME2) | ($BRIGHTNESS_NAME2 $BRIGHTNESS_DOWN2))/action="down"/;
+$BRIGHTNESS_MAX_CMD = (($BRIGHTNESS_MAX $BRIGHTNESS_NAME1) | ($BRIGHTNESS_NAME1 $BRIGHTNESS_MAX) | ($BRIGHTNESS_MAX $BRIGHTNESS_NAME2) | ($BRIGHTNESS_NAME2 $BRIGHTNESS_MAX))/action="max"/;
+$BRIGHTNESS_MIN_CMD = (($BRIGHTNESS_MIN $BRIGHTNESS_NAME1) | ($BRIGHTNESS_NAME1 $BRIGHTNESS_MIN) | ($BRIGHTNESS_MIN $BRIGHTNESS_NAME2) | ($BRIGHTNESS_NAME2 $BRIGHTNESS_MIN))/action="min"/;
+$BRIGHTNESS_CMD = (($BRIGHTNESS_UP_CMD) | ($BRIGHTNESS_DONW_CMD) | ($BRIGHTNESS_MAX_CMD) | ($BRIGHTNESS_MIN_CMD))/domain="brightness"/;
+
+
+
+
+$EQ_NAMES = (用户 | 电子 | 摇滚 | 古典 | 爵士 | 最佳 | 平面 | 流行)/k="value"/;
+$EQ_CMD = (((设置)($EQ_NAMES)(音效)) | ((设置音效)[为]($EQ_NAMES)))/domain="eq"/;
+
+
+$DATASOURCE_OPT1 = (碟机 | 光碟 | 光盘 | 光驱 | 内存卡 | 记忆棒 | USB | 存储卡 | 优盘 |拨号 |电话 | 免提 | 收音机 | 电台 | 广播 | 音乐[播放器])/k="device"/;
+$DATASOURCE_OPT2 = (蓝牙 | WIFI| 音乐[播放器])/k="device"/;
+$OPT_OPEN_ACTION_PREFIX = (打开 | 开启 | 启动)/action="open"/;
+$OPT_CLOSE_ACTION_PREFIX = (关闭 | 关掉)/action="close"/;
+$OPT_OPEN_CMD = ($OPT_OPEN_ACTION_PREFIX)($DATASOURCE_OPT1 | $DATASOURCE_OPT2);
+$OPT_CLOSE_CMD = ($OPT_CLOSE_ACTION_PREFIX)($DATASOURCE_OPT2);
+$OPT_CMD = ($OPT_OPEN_CMD | $OPT_CLOSE_CMD)/domain="opt"/;
+
+
+$DATASOURCE_APP = #APPNAME#;
+$DATASOURCE_APPX = ($DATASOURCE_APP)/k="appname"/;
+$APP_OPEN_ACTION_PREFIX = (打开 | 进入 | 转到 | 开启 | 启动)/action="open"/;
+$APP_CLOSE_ACTION_PREFIX = (关闭 | 关掉 | 结束 | 退出)/action="close"/;
+$APP_NAME_ACTION = (应用程序 | 程序 | 应用);
+$APP_OPEN_CMD = ($APP_OPEN_ACTION_PREFIX)[$APP_NAME_ACTION]($DATASOURCE_APPX);
+$APP_CLOSE_CMD = ($APP_CLOSE_ACTION_PREFIX)[$APP_NAME_ACTION]($DATASOURCE_APPX);
+$APP_CMD = (($APP_OPEN_CMD) | ($APP_CLOSE_CMD))/domain="app"/;
+
+
+$MESSAGE = ($MEDIA_CMD) | ($TCHIP_CMD)  | ($MEDIA_RADIO_CMD) | ($BT_CMD) | ($VOLUME_CMD) | ($BRIGHTNESS_CMD) | ($EQ_CMD) | ($OPT_CMD) | ($APP_CMD);
+
+( \<s\> (  $MESSAGE  ) \<\/s\> )

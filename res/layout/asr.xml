@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#00000000" >
+    <LinearLayout 
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        />
+
+    <RelativeLayout
+        android:id="@+id/layoutBack"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="0dp" >
+
+        <Button
+            android:id="@+id/btnToMultimedia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ui_back_arrow_bg_transparent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ui_near_arrow_back" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >        
+
+        <ImageView
+            android:id="@+id/imageAnim"
+	        android:layout_width="110dip"
+	        android:layout_height="110dip"
+	        android:layout_centerHorizontal="true"
+	        />
+        <ImageView
+            android:id="@+id/imageVoice"
+	        android:layout_width="110dip"
+	        android:layout_height="110dip"
+	        android:src="@drawable/speech_voice_default"
+	        android:layout_centerHorizontal="true"
+	        />
+
+	    <LinearLayout
+	        android:id="@+id/layoutHelp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/imageAnim"
+	        android:orientation="horizontal" >
+	
+	        <Button
+	            android:id="@+id/btnHelp"
+	            android:layout_width="60dp"
+	            android:layout_height="60dp"
+	            android:layout_margin="10dp"
+	            android:background="@drawable/ui_chat_help" />
+	
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/what_can_i_say"
+	            android:textSize="20sp"
+	            android:layout_gravity="center_vertical"
+	            android:textColor="#888888" />
+	    </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/chart_msg_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@+id/layout_bottom"
+        android:layout_alignParentTop="true"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:id="@+id/chart_msg_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" />
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Speech</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="what_can_i_say">我可以说什么？</string>
+    <string name="input_tts_content">输入合成内容:</string>
+    <string name="tts_sign">（）</string>
+    <string name="tts_start">开始合成</string>
+    <string name="tts_play_pause">暂停播放</string>
+    <string name="tts_play_resume">恢复播放</string>
+    <string name="tts_pause">停止播放</string>
+    
+    
+    <string name="sliding_show_btn">"你可以说:"</string>
+    <string name="sliding_navi">导航</string>
+    <string name="sliding_navi_pos">导航到深圳北站</string>
+    <string name="sliding_datil">拨号</string>
+    <string name="sliding_datil_to">打电话给老王</string>
+    <string name="sliding_mms">短信</string>
+    <string name="sliding_mms_to">发短信给小张晚上一起吃饭</string>
+    <string name="sliding_app">应用</string>
+    <string name="sliding_app_open">启动百度地图</string>
+    <string name="sliding_weather">天气</string>
+    <string name="sliding_weather_city">北京天气怎么样</string>
+    <string name="sliding_talk">聊天</string>
+    <string name="sliding_talk_show">聊聊天吧</string>
+    
+    <string-array name="stream_entries">
+        <item>通话</item>
+        <item>系统</item>
+        <item>铃声</item>
+        <item>音乐</item>
+        <item>闹铃</item>
+        <item>通知</item>
+    </string-array>
+    <string-array name="stream_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>

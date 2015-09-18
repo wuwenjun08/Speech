@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/send_msg_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="18dip"
+    android:gravity="right"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/send_msg_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    	android:layout_marginTop="5dip"
+        android:background="@drawable/my_bubble_bg"
+        android:textColor="#4ec8bb"
+        android:textSize="30dp"
+        />
+
+</LinearLayout>
